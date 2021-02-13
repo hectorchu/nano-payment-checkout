@@ -5,14 +5,16 @@ import queryString from 'query-string';
 
 export default function App() {
   const props = queryString.parse(window.location.search);
-  const {amount, onSuccess, onError} = props;
+  const {amount} = props;
   const [show, setShow] = useState(true);
   const [err, setErr] = useState();
   const account = useNanoPayment({
     ...props,
+    apiURL: props.api_url,
+    paymentID: props.payment_id,
     show,
-    onSuccess: ({id, block_hash}) => {
-      fetch(`${onSuccess}&paymentID=${id}&blockHash=${block_hash}`);
+    onSuccess: ({id}) => {
+      window.location = `${props.on_success}&payment_id=${id}`;
     },
     onError: err => {
       setShow(false);
@@ -21,11 +23,7 @@ export default function App() {
   });
   useEffect(() => {
     if (show) return;
-    if (err) {
-      fetch(`${onError}&error=${err.message}`);
-    } else {
-      fetch(`${onError}&error=cancelled`);
-    }
+    window.location = `${props.on_error}&err=${err ? encodeURIComponent(err.message) : 'Cancelled'}`;
   }, [show]);
 
   if (!account) return null;
