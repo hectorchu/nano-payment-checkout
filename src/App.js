@@ -32,7 +32,7 @@ export default function App() {
   if (!account) return null;
   return (
     <Container>
-      <Row className="align-items-center justify-content-center vh-100">
+      <Row className="h-100 align-items-center justify-content-center">
         <Card bg="light" border="secondary" text="dark" style={{width: '24rem'}}>
           <Card.Header as="h4">{title}</Card.Header>
           <Card.Body>
