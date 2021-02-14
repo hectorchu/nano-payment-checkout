@@ -10,4 +10,7 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  overflow-wrap: break-word;
+  user-select: all;
+  white-space: pre-wrap;
 }
