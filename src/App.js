@@ -19,8 +19,8 @@ export default function App() {
       window.location = `${on_success}&payment_id=${id}`;
     },
     onError: err => {
-      setShow(false);
       setErr(err);
+      setShow(false);
     },
   });
   useEffect(() => {
